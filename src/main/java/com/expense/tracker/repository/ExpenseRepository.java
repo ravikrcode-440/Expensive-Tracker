@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     
-    // Sirf login user ke expenses nikalne ke liye
+    // To retrieve the expenses of only the logged-in user.
     List<Expense> findByUserId(Long userId);
     
-    // Category wise filter ke liye
+    // Category wise filter 
     List<Expense> findByUserIdAndCategory(Long userId, String category);
 }
