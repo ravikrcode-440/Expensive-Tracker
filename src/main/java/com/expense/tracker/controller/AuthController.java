@@ -60,14 +60,14 @@ public class AuthController {
         String email = auth.getName();
         User user = userService.findUserByEmail(email);
         
-        // 1. User ka naam
+        // User name
         model.addAttribute("userName", user.getName());
         
-        // 2. User ke saare expenses
+        // users total expense
         List<Expense> expenses = expenseService.getExpensesByUserId(user.getId());
         model.addAttribute("expenses", expenses);
         
-        // 3. Total amount calculate
+        // Total amount calculate
         double total = expenses.stream().mapToDouble(Expense::getAmount).sum();
         model.addAttribute("totalAmount", total);
         
