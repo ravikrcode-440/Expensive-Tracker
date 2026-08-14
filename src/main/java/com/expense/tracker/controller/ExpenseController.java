@@ -25,27 +25,27 @@ public class ExpenseController {
         this.userService = userService;
     }
 
-    // 1. Add Expense Form Dikhao
+    // show from add expense
     @GetMapping("/expense/new")
     public String showAddExpenseForm(Model model) {
         Expense expense = new Expense();
-        expense.setExpenseDate(LocalDate.now()); // Default aaj ki date
+        expense.setExpenseDate(LocalDate.now()); // Default date
         model.addAttribute("expense", expense);
         return "expense/add-expense"; // templates/expense/add-expense.html
     }
 
-    // 2. Expense Save Karo
+    // save expense
     @PostMapping("/expense/save")
     public String saveExpense(@ModelAttribute("expense") Expense expense) {
-        // Login user nikalo
+        // find user login
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
         User user = userService.findUserByEmail(email);
         
-        // Expense me user set karo
+        // users set in expense
         expense.setUser(user);
         expenseService.saveExpense(expense);
         
-        return "redirect:/dashboard?success"; // Save hone ke baad dashboard pe bhejo
+        return "redirect:/dashboard?success"; // Redirect to the dashboard after saving.
     }
 }
