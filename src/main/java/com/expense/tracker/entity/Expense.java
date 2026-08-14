@@ -26,16 +26,16 @@ public class Expense {
     @Column(name = "payment_mode", length = 20)
     private String paymentMode; // Cash, UPI, Card
 
-    // Ye line batati hai ki har expense kisi 1 user ka hai
+    // This line indicates that every expense belongs to a specific user.
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // 1. Default Constructor
+    //  Default Constructor
     public Expense() {
     }
 
-    // 2. All Args Constructor
+    // All Args Constructor
     public Expense(Long id, Double amount, String category, String description, 
                    LocalDate expenseDate, String paymentMode, User user) {
         this.id = id;
@@ -47,7 +47,7 @@ public class Expense {
         this.user = user;
     }
 
-    // 3. GETTERS - Alt+Shift+S → Generate Getters and Setters
+    // GETTERS 
     public Long getId() { return id; }
     public Double getAmount() { return amount; }
     public String getCategory() { return category; }
