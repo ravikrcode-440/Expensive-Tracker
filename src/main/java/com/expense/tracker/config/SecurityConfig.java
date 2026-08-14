@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 @EnableWebSecurity
 public class SecurityConfig {
 
-	// 1. Password ko encrypt karne ke liye - BCrypt use hoga
+	// To encrypt the password – bcrypt will be used.
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -25,18 +25,15 @@ public class SecurityConfig {
 		return config.getAuthenticationManager();
 	}
 
-	// 2. Kis page pe login chahiye, kis pe nahi - ye yaha set hota hai
+	// You configure here which pages require a login and which do not.
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/register", "/login", "/css/**", "/js/**").permitAll() // Ye
-																														// pages
-																														// bina
-																														// login
-																														// khulenge
-				.anyRequest().authenticated() // Baaki sab pages ke liye login jaruri
-		).formLogin(form -> form.loginPage("/login") // Hamara custom login page ka URL
-				.loginProcessingUrl("/login") // Form submit hone pe kaha jaye
-				.defaultSuccessUrl("/dashboard", true) // Login ke baad kaha bhejna
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/register", "/login", "/css/**", "/js/**").permitAll() // 
+																														
+				.anyRequest().authenticated() // Login is required for all other pages.
+		).formLogin(form -> form.loginPage("/login") // Our custom login page URL
+				.loginProcessingUrl("/login") // A message should be displayed upon form submission.
+				.defaultSuccessUrl("/dashboard", true) // Where should the user be sent after logging in?
 				.permitAll())
 				.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll());
 
