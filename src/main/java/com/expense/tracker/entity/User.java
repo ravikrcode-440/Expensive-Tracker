@@ -23,17 +23,17 @@ public class User {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     
-    // Jab naya user save hoga tab time auto set ho jayega
+    // for set auto time
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
 
-    // 1. Khali Constructor - JPA ke liye jaruri
+    // Constructor - JPA
     public User() {
     }
 
-    // 2. Full Constructor
+    // Full Constructor
     public User(Long id, String name, String email, String password, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
@@ -42,14 +42,14 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    // 3. GETTERS - Eclipse Shortcut: Code me right click → Source → Generate Getters and Setters
+    // GETTERS 
     public Long getId() { return id; }
     public String getName() { return name; }
     public String getEmail() { return email; }
     public String getPassword() { return password; }
     public LocalDateTime getCreatedAt() { return createdAt; }
 
-    // 4. SETTERS
+    // SETTERS
     public void setId(Long id) { this.id = id; }
     public void setName(String name) { this.name = name; }
     public void setEmail(String email) { this.email = email; }
