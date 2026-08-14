@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     
-    // Login ke time kaam aayega
+    // It will come in handy at the time of login.
     User findByEmail(String email);
     
-    // Register ke time check karne ke liye ki email exist karta hai ya nahi
+    // To check during registration whether the email exists or not.
     Boolean existsByEmail(String email);
 }
